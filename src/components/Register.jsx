@@ -17,10 +17,10 @@ const Register = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
+    setFormData((formData)=>({
       ...formData,
       [name]: value,
-    });
+    }));
   };
 
   const handleSubmit = (e) => {
@@ -45,7 +45,7 @@ const Register = () => {
               className="w-full p-2 border border-gray-300 rounded mt-1"
               required
             />
-          </label>
+        </label>
           <label className="block mb-4">
             10th Percentage
             <input
