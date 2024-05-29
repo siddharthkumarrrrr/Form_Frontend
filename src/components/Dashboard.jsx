@@ -3,9 +3,9 @@ import React, { useState, useEffect } from 'react';
 const Dashboard = () => {
     const [alumni, setAlumni] = useState([]);
 
-    // useEffect(() => {
-    //     fetchAlumni();
-    // }, []);
+     useEffect(() => {
+         fetchAlumni();
+    }, []);
 
     const fetchAlumni = async () => {
         try {
