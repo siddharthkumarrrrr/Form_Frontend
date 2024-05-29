@@ -3,15 +3,14 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './components/Login';
 import Navbar from './components/Navbar';
 import Register from './components/Register';
-import Dashboard from './components/Dashbord';
+import Dashboard from './components/Dashboard';
 
 function App() {
   return (
     <Router>
-      <Navbar />
       <Routes>
         <Route path="/" element={<Register />} />
-        <Route path="/protected-page" component={Dashboard} />
+        <Route path="/protected-page" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
@@ -19,4 +18,3 @@ function App() {
 }
 
 export default App;
- 

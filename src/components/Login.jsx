@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import './Login.css'
 import img from '/images.jpg';
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import Navbar from "./Navbar";
 
 function Login() {
   const [passwordType, setPasswordType] = useState("password");
@@ -19,26 +20,45 @@ function Login() {
   }
 
   const toggleEye = () => {
-    setPasswordType((prevType) => prevType === "password" ? "text" : "password");
+    setPasswordType((prevType) => prevType === "password" ? "text" : "password" );
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(inputdata);
     try {
-        const response = await fetch('http://localhost:3000/api/login', {
+        const response = await fetch('http://localhost:3000/auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(inputdata)
+            body: JSON.stringify(inputdata) // Assuming inputdata is defined
         });
 
         const result = await response.json();
         if (response.ok) {
+            // Token received successfully
             alert('Login successful!');
             localStorage.setItem('token', result.token);
-            window.location.href = '/protected-page'; 
+
+            // Call verify-token API to ensure token validity
+            const verifyResponse = await fetch('http://localhost:3000/auth/verify-token', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${result.token}`
+                }
+            });
+
+            const verifyResult = await verifyResponse.json();
+            if (verifyResponse.ok) {
+                // Token is valid, redirect to protected page
+                window.location.href = '/protected-page';
+            } else {
+                // Token is invalid or expired
+                alert(`Token verification failed: ${verifyResult.message}`);
+            }
         } else {
+            // Error in login
             alert(`Error: ${result.message}`);
         }
     } catch (error) {
@@ -48,8 +68,10 @@ function Login() {
 };
 
 
+
   return (
     <>
+    <Navbar/>
       <div className="flex flex-col lg:grid lg:grid-cols-12 h-screen">
         <div className="lg:col-span-6 lg:h-screen p-2 flex justify-center items-center">
           <div className="flex flex-col justify-center items-center w-full">
