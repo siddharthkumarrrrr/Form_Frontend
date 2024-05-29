@@ -9,6 +9,8 @@ const Dashboard = () => {
 
     const fetchAlumni = async () => {
         try {
+           const token=localStorage.getItem('token');
+             console.log(token);
             const response = await fetch('https://from-backend.onrender.com/auth/all', {
                 method: 'GET',
                 headers: {
