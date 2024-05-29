@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import './Login.css'
 import img from '/images.jpg';
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import Navbar from "./Navbar";
 
 function Login() {
+  const navigate = useNavigate();
   const [passwordType, setPasswordType] = useState("password");
   const [inputdata, setInputData] = useState({
     email:'',
@@ -52,7 +54,7 @@ function Login() {
             const verifyResult = await verifyResponse.json();
             if (verifyResponse.ok) {
                 // Token is valid, redirect to protected page
-                window.location.href = '/protected-page';
+                navigate('/protected-page');
             } else {
                 // Token is invalid or expired
                 alert(`Token verification failed: ${verifyResult.message}`);
