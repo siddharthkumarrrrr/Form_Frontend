@@ -27,7 +27,7 @@ function Login() {
     e.preventDefault();
     console.log(inputdata);
     try {
-        const response = await fetch('http://localhost:3000/auth/login', {
+        const response = await fetch('https://from-backend.onrender.com/auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -42,7 +42,7 @@ function Login() {
             localStorage.setItem('token', result.token);
 
             // Call verify-token API to ensure token validity
-            const verifyResponse = await fetch('http://localhost:3000/auth/verify-token', {
+            const verifyResponse = await fetch('https://from-backend.onrender.com/auth/verify-token', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${result.token}`

@@ -9,7 +9,7 @@ const Dashboard = () => {
 
     const fetchAlumni = async () => {
         try {
-            const response = await fetch('http://localhost:3000/auth/all', {
+            const response = await fetch('https://from-backend.onrender.com/auth/all', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
