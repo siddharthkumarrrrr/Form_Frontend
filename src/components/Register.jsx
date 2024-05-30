@@ -42,6 +42,7 @@ const Register = () => {
       });
   
       if (!response.ok) {
+        setIsSubmitting(false);
         const errorData = await response.json();
         throw new Error(errorData.message || 'Failed to register');
       }
