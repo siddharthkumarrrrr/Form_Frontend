@@ -4,6 +4,7 @@ import Navbar from './Navbar';
 
 const Register = () => {
   const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     tenthPercentage: '',
@@ -29,6 +30,7 @@ const Register = () => {
   
   const handleSubmit = async (e) => {
     e.preventDefault();
+     setIsSubmitting(true);
     console.log(formData);
     try {
       const response = await fetch('https://from-backend.onrender.com/user/register', {
@@ -204,10 +206,11 @@ const Register = () => {
         </div>
         
         <button
+           disabled={isSubmitting}
           type="submit"
           className="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
         >
-          Register
+           {isSubmitting ? 'Submitting...' : 'Submit'}
         </button>
       </form>
     </main>
